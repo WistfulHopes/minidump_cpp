@@ -194,7 +194,7 @@ bool minidump_file::parse_memory64_list_stream(std::ifstream& file, const direct
 
   uint64_t current_rva = base_rva;
 
-  for (uint64_t i = 0; i < number_of_memory_ranges && i < 10000; ++i) {
+  for (uint64_t i = 0; i < number_of_memory_ranges; ++i) {
     uint64_t start_va, size;
     file.read(reinterpret_cast<char*>(&start_va), sizeof(start_va));
     file.read(reinterpret_cast<char*>(&size), sizeof(size));
@@ -223,7 +223,7 @@ bool minidump_file::parse_memory_info_list_stream(std::ifstream& file, const dir
   if (file.fail() || size_of_entry != sizeof(memory_info_entry))
     return false;
 
-  for (uint64_t i = 0; i < number_of_entries && i < 10000; ++i) {
+  for (uint64_t i = 0; i < number_of_entries; ++i) {
     memory_info_entry info;
     file.read(reinterpret_cast<char*>(&info), sizeof(info));
     if (file.fail())
